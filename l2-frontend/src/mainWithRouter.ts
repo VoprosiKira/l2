@@ -129,6 +129,16 @@ const router = new Router({
       },
     },
     {
+      path: '/ui/eds',
+      name: 'eds',
+      component: () => import('@/pages/EDS.vue'),
+      meta: {
+        title: 'Подпись документов',
+        groups: ['Подпись документов'],
+        module: 'l2_eds',
+      },
+    },
+    {
       path: '/404',
       name: '404',
       meta: {},
@@ -142,6 +152,11 @@ const router = new Router({
 });
 
 router.beforeEach(async (to, from, next) => {
+  if (to.path === from.path && to.hash !== from.hash) {
+    next();
+    return;
+  }
+
   if (
     to.fullPath.startsWith('/ui/https://')
     || to.fullPath.startsWith('/ui/http://')

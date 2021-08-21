@@ -691,6 +691,7 @@ def directions(request):
 
 
 @ensure_csrf_cookie
+@csrf_exempt
 def eds(request, path):
     return proxy_view(request, urljoin(SettingManager.get_eds_base_url(), path))
 
